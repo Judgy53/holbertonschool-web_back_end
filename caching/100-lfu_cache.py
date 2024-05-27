@@ -38,6 +38,8 @@ class LFUCache(BaseCaching):
             del self.freq_data[discard]
 
     def find_lfu_key(self, just_inserted_key):
+        """ Find the least frequently used key in the cache
+        """
         lfu_key = None
         lfu_freq = float('inf')
         for key in iter(self.cache_data):
