@@ -8,6 +8,21 @@ import logging
 from typing import List
 
 
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
+
+
+def get_logger() -> logging.Logger:
+    """Create a user_data logger that obfuscates PII fields"""
+    logger = logging.getLogger('user_data')
+    logger.setLevel(logging.INFO)
+
+    streamHandler = logging.StreamHandler()
+    streamHandler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.addHandler(streamHandler)
+
+    return logger
+
+
 def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """ Obfuscate fields value in a log message."""

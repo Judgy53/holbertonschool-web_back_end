@@ -11,6 +11,7 @@ Covered topics :
 Table of contents:
 - [0. Regex-ing](#0-regex-ing)
 - [1. Log formatter](#1-log-formatter)
+- [2. Create logger](#2-create-logger)
 
 ## 0. Regex-ing
 Write a function called `filter_datum` that returns the log message obfuscated:
@@ -69,6 +70,25 @@ Given Files:
 
 Expected output:
 ```sh
-$ ./main.py
+$ ./1-main.py
 [HOLBERTON] my_logger INFO 2019-11-19 18:24:25,105: name=Bob;email=***;ssn=***;password=***;
+```
+
+## 2. Create logger
+Implement a `get_logger` function that takes no arguments and returns a `logging.Logger` object.
+
+- The logger should be named `"user_data"` and only log up to `logging.INFO` level. It should not propagate messages to other loggers. It should have a `StreamHandler` with `RedactingFormatter` as formatter.
+- Create a tuple `PII_FIELDS` constant at the root of the module containing the fields from `user_data.csv` that are considered PII. `PII_FIELDS` can contain only 5 fields - choose the right list of fields that can are considered as “important” PIIs or information that you **must hide** in your logs. Use it to parameterize the formatter.
+- File: `filtered_logger.py`
+
+---
+Given Files: 
+- [user_data.csv](user_data.csv)
+- [2-main.py](2-main.py)
+
+Expected output:
+```sh
+$ ./2-main.py
+<class 'logging.Logger'>
+PII_FIELDS: 5
 ```
