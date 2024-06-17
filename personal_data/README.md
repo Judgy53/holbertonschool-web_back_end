@@ -10,6 +10,7 @@ Covered topics :
 ---
 Table of contents:
 - [0. Regex-ing](#0-regex-ing)
+- [1. Log formatter](#1-log-formatter)
 
 ## 0. Regex-ing
 Write a function called `filter_datum` that returns the log message obfuscated:
@@ -33,4 +34,41 @@ Expected Output:
 $ ./0-main.py
 name=egg;email=eggmin@eggsample.com;password=xxx;date_of_birth=xxx;
 name=bob;email=bob@dylan.com;password=xxx;date_of_birth=xxx;
+```
+
+## 1. Log formatter
+Copy the following code into `filtered_logger.py`.
+
+```py
+import logging
+
+
+class RedactingFormatter(logging.Formatter):
+    """ Redacting Formatter class
+        """
+
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self):
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+
+    def format(self, record: logging.LogRecord) -> str:
+        NotImplementedError
+```
+
+- Update the class to accept a list of strings `fields` constructor argument.
+- Implement the `format` method to filter values in incoming log records using `filter_datum`. Values for fields in `fields` should be filtered.
+- DO NOT extrapolate `FORMAT` manually. The `format` method should be less than 5 lines long.
+- File: `filtered_logger.py`
+
+---
+Given Files:
+- [1-main.py](1-main.py)
+
+Expected output:
+```sh
+$ ./main.py
+[HOLBERTON] my_logger INFO 2019-11-19 18:24:25,105: name=Bob; email=***; ssn=***; password=***;
 ```
