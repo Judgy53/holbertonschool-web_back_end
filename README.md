@@ -8,3 +8,6 @@ In this project, we learned different caching algorithms, and implemented them i
 
 ## personal_data
 In this project, we learned how to obfuscate PII fields, encrypt a password and authenticate to a database in Python.
+
+## Basic_authentication
+In this project, we learned authentication patterns with Flask
