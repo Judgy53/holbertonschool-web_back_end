@@ -70,5 +70,5 @@ Given Files:
 Expected output:
 ```sh
 $ ./main.py
-[HOLBERTON] my_logger INFO 2019-11-19 18:24:25,105: name=Bob; email=***; ssn=***; password=***;
+[HOLBERTON] my_logger INFO 2019-11-19 18:24:25,105: name=Bob;email=***;ssn=***;password=***;
 ```
