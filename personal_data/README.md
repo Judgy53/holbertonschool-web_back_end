@@ -12,6 +12,7 @@ Table of contents:
 - [0. Regex-ing](#0-regex-ing)
 - [1. Log formatter](#1-log-formatter)
 - [2. Create logger](#2-create-logger)
+- [3. Connect to secure database](#3-connect-to-secure-database)
 
 ## 0. Regex-ing
 Write a function called `filter_datum` that returns the log message obfuscated:
@@ -91,4 +92,33 @@ Expected output:
 $ ./2-main.py
 <class 'logging.Logger'>
 PII_FIELDS: 5
+```
+
+## 3. Connect to secure database
+Database credentials should NEVER be stored in code or checked into version control. One secure option is to store them as environment variable on the application server.
+
+In this task, you will connect to a secure `holberton` database to read a `users` table. The database is protected by a username and password that are set as environment variables on the server named `PERSONAL_DATA_DB_USERNAME` (set the default as “root”), `PERSONAL_DATA_DB_PASSWORD` (set the default as an empty string) and `PERSONAL_DATA_DB_HOST` (set the default as “localhost”).
+
+The database name is stored in `PERSONAL_DATA_DB_NAME`.
+
+Implement a `get_db` function that returns a connector to the database (`mysql.connector.connection.MySQLConnection` object).
+- Use the `os` module to obtain credentials from the environment
+- Use the module `mysql-connector-python` to connect to the MySQL database (`pip3 install mysql-connector-python`)
+- File: `filtered_logger.py`
+
+---
+Given Files:
+- [3-main.sql](3-main.sql)
+- [3-main.py](3-main.py)
+
+Expected output:
+```sh
+$ cat 3-main.sql | mysql -uroot -p
+Enter password: 
+$
+$ echo "SELECT COUNT(*) FROM users;" | mysql -uroot -p my_db
+Enter password: 
+2
+$ PERSONAL_DATA_DB_USERNAME=root PERSONAL_DATA_DB_PASSWORD=root PERSONAL_DATA_DB_HOST=localhost PERSONAL_DATA_DB_NAME=my_db ./3-main.py
+2
 ```

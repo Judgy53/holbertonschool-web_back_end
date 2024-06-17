@@ -5,6 +5,8 @@ Module that defines multiple classes and function to filter log inputs.
 
 import re
 import logging
+import mysql.connector
+import os
 from typing import List
 
 
@@ -22,6 +24,16 @@ def get_logger() -> logging.Logger:
     logger.addHandler(streamHandler)
 
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Create a mysql database connection using environment variables."""
+    username = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    password = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    name = os.getenv('PERSONAL_DATA_DB_NAME')
+    return mysql.connector.connect(user=username, password=password,
+                                   host=host, database=name)
 
 
 def filter_datum(fields: List[str], redaction: str,
