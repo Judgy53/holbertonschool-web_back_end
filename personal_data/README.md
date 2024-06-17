@@ -15,6 +15,7 @@ Table of contents:
 - [3. Connect to secure database](#3-connect-to-secure-database)
 - [4. Read and filter data](#4-read-and-filter-data)
 - [5. Encrypting passwords](#5-encrypting-passwords)
+- [6. Check valid password](#6-check-valid-password)
 
 ## 0. Regex-ing
 Write a function called `filter_datum` that returns the log message obfuscated:
@@ -169,8 +170,29 @@ User passwords should NEVER be stored in plain text in a database.
 Given files:
 - [5-main.py](5-main.py)
 
+Expected Output:
 ```sh
-$ ./main.py
+$ ./5-main.py
 b'$2b$12$Fnjf6ew.oPZtVksngJjh1.vYCnxRjPm2yt18kw6AuprMRpmhJVxJO'
 b'$2b$12$xSAw.bxfSTAlIBglPMXeL.SJnzme3Gm0E7eOEKOVV2OhqOakyUN5m'
+```
+
+## 6. Check valid password
+Implement an `is_valid` function that expects 2 arguments and returns a boolean.
+
+- Arguments:
+  - `hashed_password`: `bytes` type
+  - `password`: string type
+- Use `bcrypt` to validate that the provided password matches the hashed password.
+- File: `encrypt_password.py`
+
+---
+Given files:
+- [6-main.py](6-main.py)
+
+Expected Output:
+```sh
+$ ./6-main.py
+b'$2b$12$Fnjf6ew.oPZtVksngJjh1.vYCnxRjPm2yt18kw6AuprMRpmhJVxJO'
+True
 ```
