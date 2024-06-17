@@ -13,6 +13,22 @@ from typing import List
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
+def main() -> None:
+    """Connect to the database, query users table and log the results"""
+    logger = get_logger()
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('SELECT * FROM users;')
+    columns = cursor.description
+    for row in cursor:
+        msg = ''
+        for (index, value) in enumerate(row):
+            msg += '{}={}; '.format(columns[index][0], value)
+        logger.info(msg)
+    cursor.close()
+    db.close()
+
+
 def get_logger() -> logging.Logger:
     """Create a user_data logger that obfuscates PII fields"""
     logger = logging.getLogger('user_data')
@@ -64,3 +80,7 @@ class RedactingFormatter(logging.Formatter):
         formatted: str = super().format(record)
         return filter_datum(self.__fields__, self.REDACTION,
                             formatted, self.SEPARATOR)
+
+
+if __name__ == "__main__":
+    main()
