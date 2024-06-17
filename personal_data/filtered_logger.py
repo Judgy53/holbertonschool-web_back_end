@@ -15,6 +15,7 @@ def get_logger() -> logging.Logger:
     """Create a user_data logger that obfuscates PII fields"""
     logger = logging.getLogger('user_data')
     logger.setLevel(logging.INFO)
+    logger.propagate = False
 
     streamHandler = logging.StreamHandler()
     streamHandler.setFormatter(RedactingFormatter(PII_FIELDS))
