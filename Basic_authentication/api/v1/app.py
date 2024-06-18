@@ -51,7 +51,7 @@ def before_request() -> str:
     if auth is None:
         return None
 
-    if not auth.require_auth(request.path, ['/api/v1/status/',
+    if not auth.require_auth(request.path, ['/api/v1/stat*',
                                             '/api/v1/unauthorized/',
                                             '/api/v1/forbidden/']):
         return None
