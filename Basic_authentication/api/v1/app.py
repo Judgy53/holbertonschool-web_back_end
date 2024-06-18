@@ -4,7 +4,6 @@ Route module for the API
 """
 from os import getenv
 from api.v1.views import app_views
-from api.v1.auth.auth import Auth
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
@@ -39,6 +38,8 @@ def forbidden(error) -> str:
 
 @app.before_request
 def before_request() -> str:
+    """ Check auth before every request
+    """
     if auth is None:
         return None
 
@@ -59,5 +60,6 @@ if __name__ == "__main__":
     port = getenv("API_PORT", "5000")
     auth_env = getenv("AUTH_TYPE", "")
     if auth_env == "auth":
+        from api.v1.auth.auth import Auth
         auth = Auth()
     app.run(host=host, port=port)
