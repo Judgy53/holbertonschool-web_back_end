@@ -22,6 +22,22 @@ class SessionAuth(Auth):
 
         return session_id
 
+    def destroy_session(self, request=None) -> bool:
+        """Attempt to destroy the user current session"""
+        if request is None:
+            return None
+
+        session = self.session_cookie(request)
+        if session is None:
+            return False
+
+        user = self.user_id_for_session_id(session)
+        if user is None:
+            return False
+
+        self.user_id_by_session_id.pop(session)
+        return True
+
     def user_id_for_session_id(self, session_id: str = None) -> str:
         """Returns a user ID based on the session_id"""
         if session_id is None or not isinstance(session_id, str):
