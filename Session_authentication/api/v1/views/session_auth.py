@@ -6,6 +6,7 @@ from os import getenv
 from models.user import User
 from api.v1.views import app_views
 
+
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """ POST /api/v1/auth_session/login
