@@ -11,6 +11,7 @@ Table of Contents:
 - [6. Basic Flask app](#6-basic-flask-app)
 - [7. Register user](#7-register-user)
 - [8. Credentials validation](#8-credentials-validation)
+- [9. Generate UUIDs](#9-generate-uuids)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -291,3 +292,12 @@ True
 False
 False
 ```
+
+## 9. Generate UUIDs
+In this task you will implement a `_generate_uuid` function in the `auth` module. The function should return a string representation of a new UUID. Use the `uuid` module.
+
+Note that the method is private to the `auth` module and should **NOT** be used outside of it.
+
+---
+
+- Out File: `auth.py`
