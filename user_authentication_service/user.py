@@ -9,7 +9,8 @@ Base = declarative_base()
 
 
 class User(Base):
-    """Represents the User model for the 'users' table"""
+    """Represents the User model for the 'users' table
+    """
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True, nullable=False)
