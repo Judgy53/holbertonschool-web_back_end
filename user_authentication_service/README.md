@@ -7,6 +7,7 @@ Table of Contents:
 - [2. Find user](#2-find-user)
 - [3. update user](#3-update-user)
 - [4. Hash password](#4-hash-password)
+- [5. Register user](#5-register-user)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -127,4 +128,36 @@ The returned bytes is a salted hash of the input password, hashed with `bcrypt.h
 ```sh
 $ python3 4-main.py
 b'$2b$12$eUDdeuBtrD41c8dXvzh95ehsWYCCAi4VH1JbESzgbgZT.eMMzi.G2'
+```
+
+## 5. Register user
+In this task, you will implement the `Auth.register_user` in the `Auth` class provided below:
+
+```py
+from db import DB
+
+
+class Auth:
+    """Auth class to interact with the authentication database.
+    """
+
+    def __init__(self):
+        self._db = DB()
+```
+
+Note that `Auth._db` is a private property and should NEVER be used from outside the class.
+
+`Auth.register_user` should take mandatory `email` and `password` string arguments and return a `User` object.
+
+If a user already exist with the passed email, raise a `ValueError` with the message `User <user's email> already exists`.
+
+If not, hash the password with `_hash_password`, save the user to the database using `self._db` and return the `User` object.
+
+---
+- Out File: `auth.py`
+- Given File: [5-main.py](5-main.py)
+```sh
+$ python3 5-main.py
+successfully created a new user!
+could not create a new user: User me@me.com already exists
 ```
