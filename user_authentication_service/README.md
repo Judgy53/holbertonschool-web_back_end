@@ -10,6 +10,7 @@ Table of Contents:
 - [5. Register user](#5-register-user)
 - [6. Basic Flask app](#6-basic-flask-app)
 - [7. Register user](#7-register-user)
+- [8. Credentials validation](#8-credentials-validation)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -275,3 +276,18 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 $
 ```
 </details>
+
+## 8. Credentials validation
+In this task, you will implement the `Auth.valid_login` method. It should expect `email` and `password` required arguments and return a boolean.
+
+Try locating the user by email. If it exists, check the password with `bcrypt.checkpw`. If it matches return `True`. In any other case, return `False`.
+
+---
+- Out File: `auth.py`
+- Given File: [8-main.py](8-main.py)
+```sh
+$ python3 8-main.py
+True
+False
+False
+```
