@@ -12,6 +12,7 @@ Table of Contents:
 - [7. Register user](#7-register-user)
 - [8. Credentials validation](#8-credentials-validation)
 - [9. Generate UUIDs](#9-generate-uuids)
+- [10. Get session ID](#10-get-session-id)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -301,3 +302,20 @@ Note that the method is private to the `auth` module and should **NOT** be used 
 ---
 
 - Out File: `auth.py`
+
+## 10. Get session ID
+In this task, you will implement the `Auth.create_session` method. It takes an `email` string argument and returns the session ID as a string.
+
+The method should find the user corresponding to the email, generate a new UUID and store it in the database as the user’s `session_id`, then return the session ID.
+
+Remember that only public methods of `self._db` can be used.
+
+---
+- Out File: `auth.py`
+- Given Files: [10-main.py](10-main.py)
+```sh
+$ python3 10-main.py
+5a006849-343e-4a48-ba4e-bbd523fcca58
+None
+$ 
+```
