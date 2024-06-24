@@ -6,6 +6,7 @@ Table of Contents:
 - [1. create user](#1-create-user)
 - [2. Find user](#2-find-user)
 - [3. update user](#3-update-user)
+- [4. Hash password](#4-hash-password)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -108,8 +109,22 @@ If an argument that does not correspond to a user attribute is passed, raise a `
 
 ---
 - Out File: `db.py`
+- Given File: [3-main.py](3-main.py) 
 ```sh
 $ python3 3-main.py
 1
 Password updated
+```
+
+## 4. Hash password
+In this task you will define a `_hash_password` method that takes in a `password` string arguments and returns bytes.
+
+The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
+
+---
+- Out File: `auth.py`
+- Given File: [4-main.py](4-main.py) 
+```sh
+$ python3 4-main.py
+b'$2b$12$eUDdeuBtrD41c8dXvzh95ehsWYCCAi4VH1JbESzgbgZT.eMMzi.G2'
 ```
