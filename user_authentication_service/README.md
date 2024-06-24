@@ -8,6 +8,7 @@ Table of Contents:
 - [3. update user](#3-update-user)
 - [4. Hash password](#4-hash-password)
 - [5. Register user](#5-register-user)
+- [6. Basic Flask app](#6-basic-flask-app)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -161,3 +162,19 @@ $ python3 5-main.py
 successfully created a new user!
 could not create a new user: User me@me.com already exists
 ```
+
+## 6. Basic Flask app
+In this task, you will set up a basic Flask app.
+
+Create a Flask app that has a single `GET` route (`"/"`) and use `flask.jsonify` to return a JSON payload of the form:
+
+```py
+{"message": "Bienvenue"}
+```
+Add the following code at the end of the module:
+
+```py
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port="5000")
+```
+- Out File: `app.py`
