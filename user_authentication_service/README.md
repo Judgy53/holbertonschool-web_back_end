@@ -1,9 +1,13 @@
 # user_authentication_service
 In the industry, you should not implement your own authentication system and use a module or framework that doing it for you (like in Python-Flask: [Flask-User](https://flask-user.readthedocs.io/en/latest/)). Here, for the learning purpose, we will walk through each step of this mechanism to understand it by doing.
 
+Table of Contents:
+- [0. User model](#0-user-model)
+- [1. create user](#1-create-user)
+- [2. Find user](#2-find-user)
+
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
-- File: `user.py`
 
 The model will have the following attributes:
 - `id`, the integer primary key
@@ -13,7 +17,7 @@ The model will have the following attributes:
 - `reset_token`, a nullable string
 
 ---
-
+- Out File: `user.py`
 - Given files: [0-main.py](0-main.py)
 ```py
 $ python3 0-main.py
@@ -73,4 +77,23 @@ Implement the `add_user` method, which has two required string arguments: `email
 $ python3 1-main.py
 1
 2
+```
+
+## 2. Find user
+In this task you will implement the `DB.find_user_by` method. This method takes in arbitrary keyword arguments and returns the first row found in the `users` table as filtered by the method’s input arguments. No validation of input arguments required at this point.
+
+Make sure that SQLAlchemy’s `NoResultFound` and `InvalidRequestError` are raised when no results are found, or when wrong query arguments are passed, respectively.
+
+**Warning:**
+- `NoResultFound` has been moved from `sqlalchemy.orm.exc` to `sqlalchemy.exc` between the version 1.3.x and 1.4.x of SQLAchemy - please make sure you are importing it from `sqlalchemy.orm.exc`
+
+---
+- Out File: `db.py`
+- Given File: [2-main.py](2-main.py) 
+```sh
+$ python3 2-main.py
+1
+1
+Not found
+Invalid
 ```
