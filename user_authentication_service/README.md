@@ -5,6 +5,7 @@ Table of Contents:
 - [0. User model](#0-user-model)
 - [1. create user](#1-create-user)
 - [2. Find user](#2-find-user)
+- [3. update user](#3-update-user)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -96,4 +97,19 @@ $ python3 2-main.py
 1
 Not found
 Invalid
+```
+
+## 3. update user
+In this task, you will implement the `DB.update_user` method that takes as argument a required `user_id` integer and arbitrary keyword arguments, and returns `None`.
+
+The method will use `find_user_by` to locate the user to update, then will update the user’s attributes as passed in the method’s arguments then commit changes to the database.
+
+If an argument that does not correspond to a user attribute is passed, raise a `ValueError`.
+
+---
+- Out File: `db.py`
+```sh
+$ python3 3-main.py
+1
+Password updated
 ```
