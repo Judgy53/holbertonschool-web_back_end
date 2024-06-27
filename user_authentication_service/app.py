@@ -2,7 +2,7 @@
 """App module
 """
 from flask import Flask, jsonify, request, abort, redirect
-from auth import Auth, NoResultFound
+from auth import Auth
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -88,6 +88,8 @@ def logout() -> str:
         - 403 if user doesn't exist
     """
     session_id = request.cookies.get("session_id")
+    if session_id is None:
+        abort(403)
 
     user = AUTH.get_user_from_session_id(session_id)
     if user is None:
