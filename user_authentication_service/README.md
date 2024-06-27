@@ -14,6 +14,7 @@ Table of Contents:
 - [9. Generate UUIDs](#9-generate-uuids)
 - [10. Get session ID](#10-get-session-id)
 - [11. Log in](#11-log-in)
+- [12. Find user by session ID](#12-find-user-by-session-id)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -335,7 +336,7 @@ Otherwise, create a new session for the user, store it the session ID as a cooki
 ```
 
 ---
-- File: `app.py`
+- Out File: `app.py`
 <details><summary>Expected Output:</summary>
 
 ```sh
@@ -394,3 +395,14 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 bob@dylan:~$ 
 ```
 </details>
+
+## 12. Find user by session ID
+In this task, you will implement the `Auth.get_user_from_session_id` method. It takes a single `session_id` string argument and returns the corresponding `User` or `None`.
+
+If the session ID is `None` or no user is found, return `None`. Otherwise return the corresponding user.
+
+Remember to only use public methods of `self._db`.
+
+---
+
+- Out File: `auth.py`
