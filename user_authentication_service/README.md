@@ -21,6 +21,7 @@ Table of Contents:
 - [16. Generate reset password token](#16-generate-reset-password-token)
 - [17. Get reset password token](#17-get-reset-password-token)
 - [18. Update password](#18-update-password)
+- [19. Update password end-point](#19-update-password-end-point)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -534,3 +535,19 @@ Otherwise, hash the password and update the user’s `hashed_password` field wit
 
 ---
 - Out File: `auth.py`
+
+## 19. Update password end-point
+In this task you will implement the `update_password` function in the `app` module to respond to the `PUT /reset_password` route.
+
+The request is expected to contain form data with fields `"email"`, `"reset_token"` and `"new_password"`.
+
+Update the password. If the token is invalid, catch the exception and respond with a 403 HTTP code.
+
+If the token is valid, respond with a 200 HTTP code and the following JSON payload:
+
+```json
+{"email": "<user email>", "message": "Password updated"}
+```
+
+---
+- Out File: `app.py`
