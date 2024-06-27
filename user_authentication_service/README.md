@@ -15,6 +15,7 @@ Table of Contents:
 - [10. Get session ID](#10-get-session-id)
 - [11. Log in](#11-log-in)
 - [12. Find user by session ID](#12-find-user-by-session-id)
+- [13. Destroy session](#13-destroy-session)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -404,5 +405,14 @@ If the session ID is `None` or no user is found, return `None`. Otherwise return
 Remember to only use public methods of `self._db`.
 
 ---
+- Out File: `auth.py`
 
+## 13. Destroy session
+In this task, you will implement `Auth.destroy_session`. The method takes a single `user_id` integer argument and returns `None`.
+
+The method updates the corresponding user’s session ID to `None`.
+
+Remember to only use public methods of `self._db`.
+
+---
 - Out File: `auth.py`
