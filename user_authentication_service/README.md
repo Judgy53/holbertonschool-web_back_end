@@ -17,6 +17,7 @@ Table of Contents:
 - [12. Find user by session ID](#12-find-user-by-session-id)
 - [13. Destroy session](#13-destroy-session)
 - [14. Log out](#14-log-out)
+- [15. User profile](#15-user-profile)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -394,7 +395,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 <h1>Unauthorized</h1>
 <p>The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.</p>
 * Closing connection 0
-bob@dylan:~$ 
+$ 
 ```
 </details>
 
@@ -427,3 +428,74 @@ Find the user with the requested session ID. If the user exists destroy the sess
 
 ---
 - Out File: `app.py`
+
+## 15. User profile
+In this task, you will implement a `profile` function to respond to the `GET /profile` route.
+
+The request is expected to contain a `session_id` cookie. Use it to find the user. If the user exist, respond with a 200 HTTP status and the following JSON payload:
+
+```json
+{"email": "<user email>"}
+```
+
+If the session ID is invalid or the user does not exist, respond with a 403 HTTP status.
+
+---
+- Out File: `app.py`
+<details><summary>Expected Result:</summary>
+
+```sh
+$ curl -XPOST localhost:5000/sessions -d 'email=bob@bob.com' -d 'password=mySuperPwd' -v
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 5000 (#0)
+> POST /sessions HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Length: 37
+> Content-Type: application/x-www-form-urlencoded
+> 
+* upload completely sent off: 37 out of 37 bytes
+* HTTP 1.0, assume close after body
+< HTTP/1.0 200 OK
+< Content-Type: application/json
+< Content-Length: 46
+< Set-Cookie: session_id=75c89af8-1729-44d9-a592-41b5e59de9a1; Path=/
+< Server: Werkzeug/1.0.1 Python/3.7.3
+< Date: Wed, 19 Aug 2020 00:15:57 GMT
+< 
+{"email":"bob@bob.com","message":"logged in"}
+* Closing connection 0
+$
+$ curl -XGET localhost:5000/profile -b "session_id=75c89af8-1729-44d9-a592-41b5e59de9a1"
+{"email": "bob@bob.com"}
+$ 
+$ curl -XGET localhost:5000/profile -b "session_id=nope" -v
+Note: Unnecessary use of -X or --request, GET is already inferred.
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 5000 (#0)
+> GET /profile HTTP/1.1
+> Host: localhost:5000
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Cookie: session_id=75c89af8-1729-44d9-a592-41b5e59de9a
+> 
+* HTTP 1.0, assume close after body
+< HTTP/1.0 403 FORBIDDEN
+< Content-Type: text/html; charset=utf-8
+< Content-Length: 234
+< Server: Werkzeug/1.0.1 Python/3.7.3
+< Date: Wed, 19 Aug 2020 00:16:43 GMT
+< 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<title>403 Forbidden</title>
+<h1>Forbidden</h1>
+<p>You don't have the permission to access the requested resource. It is either read-protected or not readable by the server.</p>
+* Closing connection 0
+
+$ 
+```
+</details>
