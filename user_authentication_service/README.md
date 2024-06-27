@@ -16,6 +16,7 @@ Table of Contents:
 - [11. Log in](#11-log-in)
 - [12. Find user by session ID](#12-find-user-by-session-id)
 - [13. Destroy session](#13-destroy-session)
+- [14. Log out](#14-log-out)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -416,3 +417,13 @@ Remember to only use public methods of `self._db`.
 
 ---
 - Out File: `auth.py`
+
+## 14. Log out
+In this task, you will implement a `logout` function to respond to the `DELETE /sessions` route.
+
+The request is expected to contain the session ID as a cookie with key `"session_id"`.
+
+Find the user with the requested session ID. If the user exists destroy the session and redirect the user to `GET /`. If the user does not exist, respond with a 403 HTTP status.
+
+---
+- Out File: `app.py`
