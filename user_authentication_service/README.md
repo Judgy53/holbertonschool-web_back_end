@@ -19,6 +19,7 @@ Table of Contents:
 - [14. Log out](#14-log-out)
 - [15. User profile](#15-user-profile)
 - [16. Generate reset password token](#16-generate-reset-password-token)
+- [17. Get reset password token](#17-get-reset-password-token)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -508,3 +509,17 @@ Find the user corresponding to the email. If the user does not exist, raise a `V
 
 ---
 - Out File: `auth.py`
+
+## 17. Get reset password token
+In this task, you will implement a `get_reset_password_token` function to respond to the `POST /reset_password` route.
+
+The request is expected to contain form data with the `"email"` field.
+
+If the email is not registered, respond with a 403 status code. Otherwise, generate a token and respond with a 200 HTTP status and the following JSON payload:
+
+```json
+{"email": "<user email>", "reset_token": "<reset token>"}
+```
+
+---
+- Out File: `app.py`
