@@ -57,7 +57,7 @@ def login() -> str:
         - password
 
     Returns :
-        - {"email": "<registered email>", "message": "logged in"}, 400
+        - {"email": "<registered email>", "message": "logged in"}, 200
         - 401 if login info is incorrect
     """
     email = request.form.get("email")
