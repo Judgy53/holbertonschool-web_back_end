@@ -20,6 +20,7 @@ Table of Contents:
 - [15. User profile](#15-user-profile)
 - [16. Generate reset password token](#16-generate-reset-password-token)
 - [17. Get reset password token](#17-get-reset-password-token)
+- [18. Update password](#18-update-password)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -523,3 +524,13 @@ If the email is not registered, respond with a 403 status code. Otherwise, gener
 
 ---
 - Out File: `app.py`
+
+## 18. Update password
+In this task, you will implement the `Auth.update_password` method. It takes `reset_token` string argument and a `password` string argument and returns `None`.
+
+Use the `reset_token` to find the corresponding user. If it does not exist, raise a `ValueError` exception.
+
+Otherwise, hash the password and update the user’s `hashed_password` field with the new hashed password and the `reset_token` field to `None`.
+
+---
+- Out File: `auth.py`
