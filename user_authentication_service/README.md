@@ -18,6 +18,7 @@ Table of Contents:
 - [13. Destroy session](#13-destroy-session)
 - [14. Log out](#14-log-out)
 - [15. User profile](#15-user-profile)
+- [16. Generate reset password token](#16-generate-reset-password-token)
 
 ## 0. User model
 In this task you will create a SQLAlchemy model named `User` for a database table named `users` (by using the [mapping declaration](https://docs.sqlalchemy.org/en/13/orm/tutorial.html#declare-a-mapping "mapping declaration") of SQLAlchemy).
@@ -499,3 +500,11 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 $ 
 ```
 </details>
+
+## 16. Generate reset password token
+In this task, you will implement the `Auth.get_reset_password_token` method. It take an `email` string argument and returns a string.
+
+Find the user corresponding to the email. If the user does not exist, raise a `ValueError` exception. If it exists, generate a UUID and update the user’s `reset_token` database field. Return the token.
+
+---
+- Out File: `auth.py`
