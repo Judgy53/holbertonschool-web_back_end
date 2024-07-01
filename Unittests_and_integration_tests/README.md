@@ -25,6 +25,7 @@ Table of Contents:
 - [3. Parameterize and patch](#3-parameterize-and-patch)
 - [4. Parameterize and patch as decorators](#4-parameterize-and-patch-as-decorators)
 - [5. Mocking a property](#5-mocking-a-property)
+- [6. More patching](#6-more-patching)
 
 
 ## 0. Parameterize a unit test
@@ -131,6 +132,20 @@ Implement the `test_public_repos_url` method to unit-test `GithubOrgClient._publ
 Use `patch` as a context manager to patch `GithubOrgClient.org` and make it return a known payload.
 
 Test that the result of `_public_repos_url` is the expected one based on the mocked payload.
+
+---
+- Out File: `test_client.py`
+
+## 6. More patching
+Implement `TestGithubOrgClient.test_public_repos` to unit-test `GithubOrgClient.public_repos`.
+
+Use `@patch` as a decorator to mock `get_json` and make it return a payload of your choice.
+
+Use `patch` as a context manager to mock `GithubOrgClient._public_repos_url` and return a value of your choice.
+
+Test that the list of repos is what you expect from the chosen payload.
+
+Test that the mocked property and the mocked `get_json` was called once.
 
 ---
 - Out File: `test_client.py`
