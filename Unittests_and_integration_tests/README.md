@@ -23,6 +23,7 @@ Table of Contents:
 - [1. Parameterize a unit test with Exceptions](#1-parameterize-a-unit-test-with-exceptions)
 - [2. Mock HTTP calls](#2-mock-http-calls)
 - [3. Parameterize and patch](#3-parameterize-and-patch)
+- [4. Parameterize and patch as decorators](#4-parameterize-and-patch-as-decorators)
 
 
 ## 0. Parameterize a unit test
@@ -101,3 +102,22 @@ Use `unittest.mock.patch` to mock `a_method`. Test that when calling `a_property
 
 ---
 - Out File: `test_utils.py`
+
+## 4. Parameterize and patch as decorators
+Familiarize yourself with the `client.GithubOrgClient` class.
+
+In a new `test_client.py` file, declare the `TestGithubOrgClient(unittest.TestCase)` class and implement the `test_org` method.
+
+This method should test that `GithubOrgClient.org` returns the correct value.
+
+Use `@patch` as a decorator to make sure `get_json` is called once with the expected argument but make sure it is not executed.
+
+Use `@parameterized.expand` as a decorator to parametrize the test with a couple of `org` examples to pass to `GithubOrgClient`, in this order:
+
+- `google`
+- `abc`
+
+Of course, no external HTTP calls should be made.
+
+---
+- Out File: `test_client.py`

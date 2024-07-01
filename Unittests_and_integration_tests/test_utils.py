@@ -2,7 +2,7 @@
 """ Unit tests for utils module
 """
 import unittest
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch, Mock
 from parameterized import parameterized
 from typing import Mapping, Sequence, Dict
 from utils import access_nested_map, get_json, memoize
