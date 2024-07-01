@@ -22,6 +22,7 @@ Table of Contents:
 - [0. Parameterize a unit test](#0-parameterize-a-unit-test)
 - [1. Parameterize a unit test with Exceptions](#1-parameterize-a-unit-test-with-exceptions)
 - [2. Mock HTTP calls](#2-mock-http-calls)
+- [3. Parameterize and patch](#3-parameterize-and-patch)
 
 
 ## 0. Parameterize a unit test
@@ -77,3 +78,26 @@ Test that the output of `get_json` is equal to `test_payload`.
 
 ---
 - File: `test_utils.py`
+
+## 3. Parameterize and patch
+Read about memoization and familiarize yourself with the `utils.memoize` decorator.
+
+Implement the `TestMemoize(unittest.TestCase)` class with a `test_memoize` method.
+
+Inside `test_memoize`, define following class
+
+```py
+class TestClass:
+
+    def a_method(self):
+        return 42
+
+    @memoize
+    def a_property(self):
+        return self.a_method()
+```
+
+Use `unittest.mock.patch` to mock `a_method`. Test that when calling `a_property` twice, the correct result is returned but `a_method` is only called once using `assert_called_once`.
+
+---
+- Out File: `test_utils.py`
