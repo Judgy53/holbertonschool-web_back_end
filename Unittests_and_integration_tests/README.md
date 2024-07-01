@@ -20,7 +20,8 @@ Given files that will be used thoughout the project:
 ---
 Table of Contents:
 - [0. Parameterize a unit test](#0-parameterize-a-unit-test)
-- [1. Parameterize a unit test](#1-parameterize-a-unit-test)
+- [1. Parameterize a unit test with Exceptions](#1-parameterize-a-unit-test-with-exceptions)
+- [2. Mock HTTP calls](#2-mock-http-calls)
 
 
 ## 0. Parameterize a unit test
@@ -47,7 +48,7 @@ The body of the test method should not be longer than 2 lines.
 ---
 - Out File: `test_utils.py`
 
-## 1. Parameterize a unit test
+## 1. Parameterize a unit test with Exceptions
 Implement `TestAccessNestedMap.test_access_nested_map_exception`. Use the `assertRaises` context manager to test that a `KeyError` is raised for the following inputs (use `@parameterized.expand`):
 
 ```py
@@ -57,3 +58,22 @@ nested_map={"a": 1}, path=("a", "b")
 
 ---
 - Out File: `test_utils.py`
+  
+## 2. Mock HTTP calls
+Familiarize yourself with the `utils.get_json` function.
+
+Define the `TestGetJson(unittest.TestCase)` class and implement the `TestGetJson.test_get_json` method to test that `utils.get_json` returns the expected result.
+
+We don’t want to make any actual external HTTP calls. Use `unittest.mock.patch` to patch `requests.get`. Make sure it returns a `Mock` object with a `json` method that returns `test_payload` which you parametrize alongside the `test_url` that you will pass to `get_json` with the following inputs:
+
+```py
+test_url="http://example.com", test_payload={"payload": True}
+test_url="http://holberton.io", test_payload={"payload": False}
+```
+
+Test that the mocked `get` method was called exactly once (per input) with `test_url` as argument.
+
+Test that the output of `get_json` is equal to `test_payload`.
+
+---
+- File: `test_utils.py`
