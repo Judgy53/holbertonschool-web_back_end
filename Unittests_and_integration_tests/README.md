@@ -20,6 +20,7 @@ Given files that will be used thoughout the project:
 ---
 Table of Contents:
 - [0. Parameterize a unit test](#0-parameterize-a-unit-test)
+- [1. Parameterize a unit test](#1-parameterize-a-unit-test)
 
 
 ## 0. Parameterize a unit test
@@ -42,6 +43,17 @@ nested_map={"a": {"b": 2}}, path=("a", "b")
 For each of these inputs, test with `assertEqual` that the function returns the expected result.
 
 The body of the test method should not be longer than 2 lines.
+
+---
+- Out File: `test_utils.py`
+
+## 1. Parameterize a unit test
+Implement `TestAccessNestedMap.test_access_nested_map_exception`. Use the `assertRaises` context manager to test that a `KeyError` is raised for the following inputs (use `@parameterized.expand`):
+
+```py
+nested_map={}, path=("a",)
+nested_map={"a": 1}, path=("a", "b")
+```
 
 ---
 - Out File: `test_utils.py`
