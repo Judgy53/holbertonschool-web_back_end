@@ -24,6 +24,7 @@ Table of Contents:
 - [2. Mock HTTP calls](#2-mock-http-calls)
 - [3. Parameterize and patch](#3-parameterize-and-patch)
 - [4. Parameterize and patch as decorators](#4-parameterize-and-patch-as-decorators)
+- [5. Mocking a property](#5-mocking-a-property)
 
 
 ## 0. Parameterize a unit test
@@ -118,6 +119,18 @@ Use `@parameterized.expand` as a decorator to parametrize the test with a couple
 - `abc`
 
 Of course, no external HTTP calls should be made.
+
+---
+- Out File: `test_client.py`
+
+## 5. Mocking a property
+`memoize` turns methods into properties. Read up on how to mock a property (see resource).
+
+Implement the `test_public_repos_url` method to unit-test `GithubOrgClient._public_repos_url`.
+
+Use `patch` as a context manager to patch `GithubOrgClient.org` and make it return a known payload.
+
+Test that the result of `_public_repos_url` is the expected one based on the mocked payload.
 
 ---
 - Out File: `test_client.py`
