@@ -26,6 +26,7 @@ Table of Contents:
 - [4. Parameterize and patch as decorators](#4-parameterize-and-patch-as-decorators)
 - [5. Mocking a property](#5-mocking-a-property)
 - [6. More patching](#6-more-patching)
+- [7. Parameterize](#7-parameterize)
 
 
 ## 0. Parameterize a unit test
@@ -146,6 +147,21 @@ Use `patch` as a context manager to mock `GithubOrgClient._public_repos_url` and
 Test that the list of repos is what you expect from the chosen payload.
 
 Test that the mocked property and the mocked `get_json` was called once.
+
+---
+- Out File: `test_client.py`
+
+## 7. Parameterize
+Implement `TestGithubOrgClient.test_has_license` to unit-test `GithubOrgClient.has_license`.
+
+Parametrize the test with the following inputs
+
+```py
+repo={"license": {"key": "my_license"}}, license_key="my_license"
+repo={"license": {"key": "other_license"}}, license_key="my_license"
+```
+
+You should also parameterize the expected returned value.
 
 ---
 - Out File: `test_client.py`

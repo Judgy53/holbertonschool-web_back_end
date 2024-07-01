@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Unit tests for client module
 """
+from typing import Dict
 import unittest
 from unittest.mock import patch, MagicMock, PropertyMock
 from parameterized import parameterized
@@ -56,3 +57,13 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(client.public_repos(), ["1st repo", "2nd repo"])
             mock_url.assert_called_once_with()
             mock_get_json.assert_called_once_with(mock_url.return_value)
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo: Dict, license_key: str, expected: bool):
+        """ Tests output for GithubOrgClient.has_license()
+        """
+        client = GithubOrgClient("google")
+        self.assertEqual(client.has_license(repo, license_key), expected)
