@@ -14,6 +14,7 @@ Table of Contents:
 - [2. Get locale from request](#2-get-locale-from-request)
 - [3. Parametrize templates](#3-parametrize-templates)
   - [4. Force locale with URL parameter](#4-force-locale-with-url-parameter)
+- [5. Mock logging in](#5-mock-logging-in)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -103,3 +104,39 @@ Now you should be able to test different translations by visiting `http://127.0.
 
 ---
 - Out File: `4-app.py, templates/4-index.html`
+
+## 5. Mock logging in
+Creating a user login system is outside the scope of this project. To emulate a similar behavior, copy the following user table in `5-app.py`.
+
+```py
+users = {
+    1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
+    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+    3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
+    4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
+}
+```
+
+This will mock a database user table. Logging in will be mocked by passing `login_as` URL parameter containing the user ID to log in as.
+
+Define a `get_user` function that returns a user dictionary or `None` if the ID cannot be found or if `login_as` was not passed.
+
+Define a `before_request` function and use the `app.before_request` decorator to make it be executed before all other functions. `before_request` should use `get_user` to find a user if any, and set it as a global on `flask.g.user`.
+
+In your HTML template, if a user is logged in, in a paragraph tag, display a welcome message otherwise display a default message as shown in the table below.
+
+| msgid | English | French |
+| --- | --- | --- |
+| `logged_in_as` | `"You are logged in as %(username)s."` | `"Vous êtes connecté en tant que %(username)s."` |
+| `not_logged_in` | `"You are not logged in."` | `"Vous n'êtes pas connecté."` |
+
+**Visiting `http://127.0.0.1:5000/` in your browser should display this:**
+
+![](previews/5.png)
+
+**Visiting `http://127.0.0.1:5000/?login_as=2` in your browser should display this:** 
+
+![](previews/5-logged.png)
+
+---
+- Out File: `5-app.py, templates/5-index.html`
