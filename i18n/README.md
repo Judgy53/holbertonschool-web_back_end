@@ -11,6 +11,7 @@ Covered Topics:
 Table of Contents:
 - [0. Basic Flask app](#0-basic-flask-app)
 - [1. Basic Babel setup](#1-basic-babel-setup)
+- [2. Get locale from request](#2-get-locale-from-request)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -35,3 +36,9 @@ Use that class as config for your Flask app.
 
 ---
 - Out File: `1-app.py, templates/1-index.html`
+
+## 2. Get locale from request
+Create a `get_locale` function with the `babel.localeselector` decorator. Use `request.accept_languages` to determine the best match with our supported languages.
+
+---
+- Out File: `2-app.py, templates/2-index.html`
