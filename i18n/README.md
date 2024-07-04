@@ -13,6 +13,7 @@ Table of Contents:
 - [1. Basic Babel setup](#1-basic-babel-setup)
 - [2. Get locale from request](#2-get-locale-from-request)
 - [3. Parametrize templates](#3-parametrize-templates)
+  - [4. Force locale with URL parameter](#4-force-locale-with-url-parameter)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -85,3 +86,20 @@ Reload the home page of your app and make sure that the correct messages show up
 
 ---
 - Out File: `3-app.py, babel.cfg, templates/3-index.html, translations/en/LC_MESSAGES/messages.po, translations/fr/LC_MESSAGES/messages.po, translations/en/LC_MESSAGES/messages.mo, translations/fr/LC_MESSAGES/messages.mo`
+
+### 4\. Force locale with URL parameter
+
+mandatory
+
+In this task, you will implement a way to force a particular locale by passing the `locale=fr` parameter to your app’s URLs.
+
+In your `get_locale` function, detect if the incoming request contains `locale` argument and ifs value is a supported locale, return it. If not or if the parameter is not present, resort to the previous default behavior.
+
+Now you should be able to test different translations by visiting `http://127.0.0.1:5000?locale=[fr|en]`.
+
+**Visiting `http://127.0.0.1:5000/?locale=fr` should display this level 1 heading:** 
+
+![](previews/4.png)
+
+---
+- Out File: `4-app.py, templates/4-index.html`
