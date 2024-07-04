@@ -13,9 +13,10 @@ Table of Contents:
 - [1. Basic Babel setup](#1-basic-babel-setup)
 - [2. Get locale from request](#2-get-locale-from-request)
 - [3. Parametrize templates](#3-parametrize-templates)
-  - [4. Force locale with URL parameter](#4-force-locale-with-url-parameter)
+- [4. Force locale with URL parameter](#4-force-locale-with-url-parameter)
 - [5. Mock logging in](#5-mock-logging-in)
 - [6. Use user locale](#6-use-user-locale)
+- [7. Infer appropriate time zone](#7-infer-appropriate-time-zone)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -89,7 +90,7 @@ Reload the home page of your app and make sure that the correct messages show up
 ---
 - Out File: `3-app.py, babel.cfg, templates/3-index.html, translations/en/LC_MESSAGES/messages.po, translations/fr/LC_MESSAGES/messages.po, translations/en/LC_MESSAGES/messages.mo, translations/fr/LC_MESSAGES/messages.mo`
 
-### 4\. Force locale with URL parameter
+## 4. Force locale with URL parameter
 
 mandatory
 
@@ -156,3 +157,17 @@ Test by logging in as different users
 
 ---
 - Out File: `6-app.py, templates/6-index.html`
+
+## 7. Infer appropriate time zone
+Define a `get_timezone` function and use the `babel.timezoneselector` decorator.
+
+The logic should be the same as `get_locale`:
+
+1. Find `timezone` parameter in URL parameters
+2. Find time zone from user settings
+3. Default to UTC
+
+Before returning a URL-provided or user time zone, you must validate that it is a valid time zone. To that, use `pytz.timezone` and catch the `pytz.exceptions.UnknownTimeZoneError` exception.
+
+---
+- Out File: `7-app.py, templates/7-index.html`
