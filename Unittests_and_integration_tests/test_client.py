@@ -97,3 +97,16 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """ Stop the patcher
         """
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """ Test output of GithubOrgClient.public_repos
+        """
+        client = GithubOrgClient("test_org")
+        self.assertEqual(client.public_repos(), self.expected_repos)
+        self.assertEqual(client.public_repos("WRONG_LICENSE"), [])
+
+    def test_public_repos_with_license(self):
+        """ Test output of GithubOrgClient.public_repos with license
+        """
+        client = GithubOrgClient("test_org")
+        self.assertEqual(client.public_repos("apache-2.0"), self.apache2_repos)
