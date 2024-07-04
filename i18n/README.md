@@ -17,6 +17,7 @@ Table of Contents:
 - [5. Mock logging in](#5-mock-logging-in)
 - [6. Use user locale](#6-use-user-locale)
 - [7. Infer appropriate time zone](#7-infer-appropriate-time-zone)
+- [8. Display the current time](#8-display-the-current-time)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -171,3 +172,25 @@ Before returning a URL-provided or user time zone, you must validate that it is 
 
 ---
 - Out File: `7-app.py, templates/7-index.html`
+
+## 8. Display the current time
+Based on the inferred time zone, display the current time on the home page in the default format. For example:
+
+`Jan 21, 2020, 5:55:39 AM` or `21 janv. 2020 à 05:56:28`
+
+Use the following translations
+
+| msgid | English | French |
+| --- | --- | --- |
+| `current_time_is` | `"The current time is %(current_time)s."` | `"Nous sommes le %(current_time)s."` |
+
+**Displaying the time in French looks like this:**
+
+![](previews/8-fr.png)
+
+**Displaying the time in English looks like this:**
+
+![](previews/8-en.png)
+
+---
+- Out File: `app.py, templates/index.html, translations/en/LC_MESSAGES/messages.po, translations/fr/LC_MESSAGES/messages.po`
