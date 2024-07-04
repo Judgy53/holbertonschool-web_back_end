@@ -17,17 +17,16 @@ class Config:
 def get_locale() -> str:
     """ Find the best locale from request
     """
-    locale = request.args.get("locale")
-    if locale and locale in app.config["LANGUAGES"]:
-        return locale
+    query_locale = request.args.get("locale")
+    if query_locale and query_locale in app.config["LANGUAGES"]:
+        return query_locale
 
     if g.user:
-        locale = g.user.get("locale")
-        if locale and locale in app.config["LANGUAGES"]:
-            return locale
+        user_locale = g.user.get("locale")
+        if user_locale and user_locale in app.config["LANGUAGES"]:
+            return user_locale
 
-    return request.accept_languages.best_match(
-        app.config["LANGUAGES"], app.config["BABEL_DEFAULT_LOCALE"])
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 app = Flask(__name__)
@@ -50,7 +49,7 @@ def get_user() -> Dict:
 
     try:
         id = int(login_as)
-    except ValueError:
+    except Exception:
         return None
 
     return users.get(id)
@@ -60,10 +59,7 @@ def get_user() -> Dict:
 def before_request():
     """ Setup app state before every request
     """
-    user = get_user()
-
-    if user:
-        g.user = user
+    g.user = get_user()
 
 
 @app.route("/", methods=["GET"])
