@@ -15,6 +15,7 @@ Table of Contents:
 - [3. Parametrize templates](#3-parametrize-templates)
   - [4. Force locale with URL parameter](#4-force-locale-with-url-parameter)
 - [5. Mock logging in](#5-mock-logging-in)
+- [6. Use user locale](#6-use-user-locale)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -140,3 +141,18 @@ In your HTML template, if a user is logged in, in a paragraph tag, display a wel
 
 ---
 - Out File: `5-app.py, templates/5-index.html`
+
+## 6. Use user locale
+Change your `get_locale` function to use a user’s preferred local if it is supported.
+
+The order of priority should be
+
+1. Locale from URL parameters
+2. Locale from user settings
+3. Locale from request header
+4. Default locale
+
+Test by logging in as different users
+
+---
+- Out File: `6-app.py, templates/6-index.html`
