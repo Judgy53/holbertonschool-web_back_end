@@ -12,6 +12,7 @@ Table of Contents:
 - [0. Basic Flask app](#0-basic-flask-app)
 - [1. Basic Babel setup](#1-basic-babel-setup)
 - [2. Get locale from request](#2-get-locale-from-request)
+- [3. Parametrize templates](#3-parametrize-templates)
 
 ## 0. Basic Flask app
 First you will setup a basic Flask app in `0-app.py`. Create a single `/` route and an `index.html` template that simply outputs “Welcome to Holberton” as page title (`<title>`) and “Hello world” as header (`<h1>`).
@@ -42,3 +43,45 @@ Create a `get_locale` function with the `babel.localeselector` decorator. Use `r
 
 ---
 - Out File: `2-app.py, templates/2-index.html`
+
+## 3. Parametrize templates
+Use the `_` or `gettext` function to parametrize your templates. Use the message IDs `home_title` and `home_header`.
+
+Create a `babel.cfg` file containing
+
+```conf
+[python: **.py]
+[jinja2: **/templates/**.html]
+extensions=jinja2.ext.autoescape,jinja2.ext.with_
+```
+
+Then initialize your translations with
+
+```sh
+$ pybabel extract -F babel.cfg -o messages.pot .
+```
+
+and your two dictionaries with
+
+```sh
+$ pybabel init -i messages.pot -d translations -l en
+$ pybabel init -i messages.pot -d translations -l fr
+```
+
+Then edit files `translations/[en|fr]/LC_MESSAGES/messages.po` to provide the correct value for each message ID for each language. Use the following translations:
+
+| msgid | English | French |
+| --- | --- | --- |
+| `home_title` | `"Welcome to Holberton"` | `"Bienvenue chez Holberton"` |
+| `home_header` | `"Hello world!"` | `"Bonjour monde!"` |
+
+Then compile your dictionaries with
+
+```sh
+$ pybabel compile -d translations
+```
+
+Reload the home page of your app and make sure that the correct messages show up.
+
+---
+- Out File: `3-app.py, babel.cfg, templates/3-index.html, translations/en/LC_MESSAGES/messages.po, translations/fr/LC_MESSAGES/messages.po, translations/en/LC_MESSAGES/messages.mo, translations/fr/LC_MESSAGES/messages.mo`
