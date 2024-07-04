@@ -21,10 +21,13 @@ def get_locale() -> str:
     if locale and locale in app.config["LANGUAGES"]:
         return locale
 
-    if g.user and g.user["locale"] in app.config["LANGUAGES"]:
-        return g.user["locale"]
+    if g.user:
+        locale = g.user.get("locale")
+        if locale and locale in app.config["LANGUAGES"]:
+            return locale
 
-    return request.accept_languages.best_match(app.config["LANGUAGES"])
+    return request.accept_languages.best_match(
+        app.config["LANGUAGES"], app.config["BABEL_DEFAULT_LOCALE"])
 
 
 app = Flask(__name__)
