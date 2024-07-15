@@ -18,6 +18,7 @@ Table of Contents:
 - [3. Spies](#3-spies)
 - [4. Stubs](#4-stubs)
 - [5. Hooks](#5-hooks)
+- [6. Async tests with done](#6-async-tests-with-done)
 
 ## 0. Basic test with Mocha and Node assertion library
 **Install Mocha using npm:**
@@ -196,3 +197,24 @@ Hooks are useful functions that can be called before execute one or all tests in
 - You should use only one `spy` to complete this exercise
 - You should use a `beforeEach` and a `afterEach` hooks to complete this exercise
 - File: `5-payment.js, 5-payment.test.js`
+
+## 6. Async tests with done
+Look into how to support async testing, for example when waiting for the answer of an API or from a Promise
+
+**Create a new file `6-payment_token.js`:**
+- Create a new function named `getPaymentTokenFromAPI`
+- The function will take an argument called `success` (boolean)
+- When `success` is true, it should return a resolved promise with the object `{data: 'Successful response from the API' }`
+- Otherwise, the function is doing nothing.
+
+**Create a new file `6-payment_token.test.js` and write a test suite named `getPaymentTokenFromAPI`**
+- How to test the result of `getPaymentTokenFromAPI(true)`?
+
+**Tips:**
+- You should be extremely careful when working with async testing. Without calling `done` properly, your test could be always passing even if what you are actually testing is never executed
+
+**Requirements:**
+- You should be able to run the test suite using `npm test 6-payment_token.test.js`
+- Every test should pass without any warning
+- You should use the `done` callback to execute this test
+- File: `6-payment_token.js, 6-payment_token.test.js`
