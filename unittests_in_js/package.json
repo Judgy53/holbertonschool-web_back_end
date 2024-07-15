@@ -4,6 +4,7 @@
   "description": "In this project, we learned how to write a test suite in Javascript using different assertion librairies.",
   "dependencies": {},
   "devDependencies": {
+    "chai": "^4.3.10",
     "mocha": "^9.2.2"
   },
   "scripts": {
