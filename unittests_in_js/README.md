@@ -16,6 +16,7 @@ Table of Contents:
 - [1. Combining descriptions](#1-combining-descriptions)
 - [2. Basic test using Chai assertion library](#2-basic-test-using-chai-assertion-library)
 - [3. Spies](#3-spies)
+- [4. Stubs](#4-stubs)
 
 ## 0. Basic test with Mocha and Node assertion library
 **Install Mocha using npm:**
@@ -151,3 +152,25 @@ Spies are a useful wrapper that will execute the wrapped function, and log usefu
 - Remember to always restore a spy after using it in a test, it will prevent you from having weird behaviors
 - Spies are really useful and allow you to focus only on what your code is doing and not the downstream APIs or functions
 - Remember that integration test is different from unit test. Your unit test should test your code, not the code of a different function
+
+## 4. Stubs
+Stubs are similar to spies. Except that you can provide a different implementation of the function you are wrapping. Sinon can be used as well for stubs.
+
+**Create a new file `4-payment.js`, and copy the code from `3-payment.js`** (same content, same behavior)
+
+**Create a new file `4-payment.test.js`, and copy the code from `3-payment.test.js`**
+- Imagine that calling the function `Utils.calculateNumber` is actually calling an API or a very expensive method. You don’t necessarily want to do that on every test run
+- Stub the function `Utils.calculateNumber` to always return the same number `10`
+- Verify that the stub is being called with `type = SUM`, `a = 100`, and `b = 20`
+- Add a spy to verify that `console.log` is logging the correct message `The total is: 10`
+
+**Requirements:**
+- You should be able to run the test suite using `npm test 4-payment.test.js`
+- Every test should pass without any warning
+- You should use a `stub` to complete this exercise
+- Do not forget to restore the spy and the stub
+- File: `4-payment.js, 4-payment.test.js`
+- 
+**Tips:**
+- Using stubs allows you to greatly speed up your test. When executing thousands of tests, saving a few seconds is important
+- Using stubs allows you to control specific edge case (e.g a function throwing an error or returning a specific result like a number or a timestamp)
