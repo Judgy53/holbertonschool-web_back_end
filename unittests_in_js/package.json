@@ -1,0 +1,12 @@
+{
+  "name": "unittests_in_js",
+  "version": "1.0.0",
+  "description": "In this project, we learned how to write a test suite in Javascript using different assertion librairies.",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^9.2.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

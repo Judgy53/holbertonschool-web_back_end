@@ -2,3 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Node Dependency directories
+node_modules/
