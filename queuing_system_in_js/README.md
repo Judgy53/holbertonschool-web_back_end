@@ -17,6 +17,7 @@ Given files:
 
 Table of Contents:
 - [0. Install a redis instance](#0-install-a-redis-instance)
+- [1. Node Redis Client](#1-node-redis-client)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -61,3 +62,55 @@ Requirements:
 
 - Running `get Holberton` in the client, should return `School`
 - File: `README.md, dump.rdb`
+
+## 1. Node Redis Client
+Install [node_redis](https://github.com/redis/node-redis "node_redis") using npm
+
+Using Babel and ES6, write a script named `0-redis_client.js`. It should connect to the Redis server running on your machine:
+
+- It should log to the console the message `Redis client connected to the server` when the connection to Redis works correctly
+- It should log to the console the message `Redis client not connected to the server: ERROR_MESSAGE` when the connection to Redis does not work
+
+**Requirements:**
+- To import the library, you need to use the keyword `import`
+- File: `0-redis_client.js`
+
+```sh
+$ ps ax | grep redis-server
+ 2070 pts/1    S+     0:00 grep --color=auto redis-server
+$ 
+$ npm run dev 0-redis_client.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "0-redis_client.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 0-redis_client.js`
+Redis client not connected to the server: Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+Redis client not connected to the server: Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+Redis client not connected to the server: Error: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+^C
+$ 
+$ ./src/redis-server > /dev/null 2>&1 &
+[1] 2073
+$ ps ax | grep redis-server
+ 2073 pts/0    Sl     0:00 ./src/redis-server *:6379
+ 2078 pts/1    S+     0:00 grep --color=auto redis-server
+$
+$ npm run dev 0-redis_client.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "0-redis_client.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 0-redis_client.js`
+Redis client connected to the server
+^C
+$
+```
