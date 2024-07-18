@@ -19,6 +19,7 @@ Table of Contents:
 - [0. Install a redis instance](#0-install-a-redis-instance)
 - [1. Node Redis Client](#1-node-redis-client)
 - [2. Node Redis client and basic operations](#2-node-redis-client-and-basic-operations)
+- [3. Node Redis client and async operations](#3-node-redis-client-and-async-operations)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -149,6 +150,35 @@ $ npm run dev 1-redis_op.js
 [nodemon] watching path(s): *.*
 [nodemon] watching extensions: js,mjs,json
 [nodemon] starting `babel-node --presets @babel/preset-env 1-redis_op.js`
+Redis client connected to the server
+School
+Reply: OK
+100
+^C
+$
+```
+
+## 3. Node Redis client and async operations
+In a file `2-redis_op_async.js`, let’s copy the code from the previous exercise (`1-redis_op.js`)
+
+Using `promisify`, modify the function `displaySchoolValue` to use ES6 `async / await`
+
+Same result as `1-redis_op.js`
+
+**Requirements:**
+- File: `2-redis_op_async.js`
+
+```sh
+$ npm run dev 2-redis_op_async.js
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "2-redis_op_async.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 2-redis_op_async.js`
 Redis client connected to the server
 School
 Reply: OK
