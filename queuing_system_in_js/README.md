@@ -20,6 +20,7 @@ Table of Contents:
 - [1. Node Redis Client](#1-node-redis-client)
 - [2. Node Redis client and basic operations](#2-node-redis-client-and-basic-operations)
 - [3. Node Redis client and async operations](#3-node-redis-client-and-async-operations)
+- [4. Node Redis client and advanced operations](#4-node-redis-client-and-advanced-operations)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -186,3 +187,59 @@ Reply: OK
 ^C
 $
 ```
+
+## 4. Node Redis client and advanced operations
+In a file named `4-redis_advanced_op.js`, let’s use the client to store a hash value
+
+**Create Hash:**
+
+Using `hset`, let’s store the following:
+- The key of the hash should be `HolbertonSchools`
+- It should have a value for:
+    - `Portland=50`
+    - `Seattle=80`
+    - `New York=20`
+    - `Bogota=20`
+    - `Cali=40`
+    - `Paris=2`
+- Make sure you use `redis.print` for each `hset`
+
+**Display Hash:**
+
+Using `hgetall`, display the object stored in Redis. It should return the following:
+
+**Requirements:**
+
+- Use callbacks for any of the operation, we will look at async operations later
+- File: `4-redis_advanced_op.js`
+
+```sh
+$ npm run dev 4-redis_advanced_op.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "4-redis_advanced_op.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 4-redis_advanced_op.js`
+Redis client connected to the server
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+Reply: 1
+{
+  Portland: '50',
+  Seattle: '80',
+  'New York': '20',
+  Bogota: '20',
+  Cali: '40',
+  Paris: '2'
+}
+^C
+$
+```
+
