@@ -23,6 +23,8 @@ Table of Contents:
 - [4. Node Redis client and advanced operations](#4-node-redis-client-and-advanced-operations)
 - [5. Node Redis client publisher and subscriber](#5-node-redis-client-publisher-and-subscriber)
 - [6. Create the Job creator](#6-create-the-job-creator)
+- [7. Create the Job processor](#7-create-the-job-processor)
+- [8. Track progress and errors with Kue: Create the Job creator](#8-track-progress-and-errors-with-kue-create-the-job-creator)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -364,3 +366,152 @@ Notification job created: 1
 Nothing else will happen - to process the job, go to the next task!
 
 If you execute multiple time this file, you will see the `JOB ID` increasing - it means you are storing new job to process…
+
+## 7. Create the Job processor
+In a file named `6-job_processor.js`:
+
+- Create a queue with `Kue`
+- Create a function named `sendNotification`:
+    - It will take two arguments `phoneNumber` and `message`
+    - It will log to the console `Sending notification to PHONE_NUMBER, with message: MESSAGE`
+- Write the queue process that will listen to new jobs on `push_notification_code`:
+    - Every new job should call the `sendNotification` function with the phone number and the message contained within the job data
+
+**Requirements:**
+- You only need one Redis server to execute the program
+- You will need to have two node processes to run each script at the same time
+- You muse use `Kue` to set up the queue
+- File: `6-job_processor.js`
+
+**Terminal 2:**
+
+```sh
+$ npm run dev 6-job_processor.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "6-job_processor.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 6-job_processor.js`
+Sending notification to 4153518780, with message: This is the code to verify your account
+
+```
+
+**Terminal 1:** let’s queue a new job!
+
+```sh
+$ npm run dev 6-job_creator.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "6-job_creator.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 6-job_creator.js`
+Notification job created: 2
+
+```
+
+**And in the same time in Terminal 2:**
+
+```
+Sending notification to 4153518780, with message: This is the code to verify your account
+```
+
+BOOM! same as `5-subscriber.js` and `5-publisher.js` but with a module to manage jobs.
+
+## 8. Track progress and errors with Kue: Create the Job creator
+In a file named `7-job_creator.js`:
+
+Create an array `jobs` with the following data inside:
+
+```js
+const jobs = [
+  {
+    phoneNumber: '4153518780',
+    message: 'This is the code 1234 to verify your account'
+  },
+  {
+    phoneNumber: '4153518781',
+    message: 'This is the code 4562 to verify your account'
+  },
+  {
+    phoneNumber: '4153518743',
+    message: 'This is the code 4321 to verify your account'
+  },
+  {
+    phoneNumber: '4153538781',
+    message: 'This is the code 4562 to verify your account'
+  },
+  {
+    phoneNumber: '4153118782',
+    message: 'This is the code 4321 to verify your account'
+  },
+  {
+    phoneNumber: '4153718781',
+    message: 'This is the code 4562 to verify your account'
+  },
+  {
+    phoneNumber: '4159518782',
+    message: 'This is the code 4321 to verify your account'
+  },
+  {
+    phoneNumber: '4158718781',
+    message: 'This is the code 4562 to verify your account'
+  },
+  {
+    phoneNumber: '4153818782',
+    message: 'This is the code 4321 to verify your account'
+  },
+  {
+    phoneNumber: '4154318781',
+    message: 'This is the code 4562 to verify your account'
+  },
+  {
+    phoneNumber: '4151218782',
+    message: 'This is the code 4321 to verify your account'
+  }
+];
+```
+
+After this array created:
+- Create a queue with `Kue`
+- Write a loop that will go through the array `jobs` and for each object:
+    - Create a new job to the queue `push_notification_code_2` with the current object
+    - If there is no error, log to the console `Notification job created: JOB_ID`
+    - On the job completion, log to the console `Notification job JOB_ID completed`
+    - On the job failure, log to the console `Notification job JOB_ID failed: ERROR`
+    - On the job progress, log to the console `Notification job JOB_ID PERCENTAGE% complete`
+- File: `7-job_creator.js`
+
+**Terminal 1**:
+
+```sh
+$ npm run dev 7-job_creator.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "7-job_creator.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 7-job_creator.js`
+Notification job created: 39
+Notification job created: 40
+Notification job created: 41
+Notification job created: 42
+Notification job created: 43
+Notification job created: 44
+Notification job created: 45
+Notification job created: 46
+Notification job created: 47
+Notification job created: 48
+Notification job created: 49
+
+```
