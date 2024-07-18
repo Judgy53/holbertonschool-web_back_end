@@ -63,6 +63,6 @@ jobs.forEach(job => {
     });
 
     queueJob.on('progress', function (progress) {
-        console.log(`Notification job ${queueJob.id} ${progress} complete`);
+        console.log(`Notification job #${queueJob.id} ${progress}% complete`);
     });
 });
