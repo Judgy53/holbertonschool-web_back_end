@@ -26,6 +26,7 @@ Table of Contents:
 - [7. Create the Job processor](#7-create-the-job-processor)
 - [8. Track progress and errors with Kue: Create the Job creator](#8-track-progress-and-errors-with-kue-create-the-job-creator)
 - [9. Track progress and errors with Kue: Create the Job processor](#9-track-progress-and-errors-with-kue-create-the-job-processor)
+- [10. Writing the job creation function](#10-writing-the-job-creation-function)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -599,4 +600,33 @@ Notification job #48 completed
 Notification job #49 0% complete
 Notification job #49 50% complete
 Notification job #49 completed
+```
+
+## 10. Writing the job creation function
+In a file named `8-job.js`, create a function named `createPushNotificationsJobs`:
+
+- It takes into argument `jobs` (array of objects), and `queue` (`Kue` queue)
+- If `jobs` is not an array, it should throw an `Error` with message: `Jobs is not an array`
+- For each job in `jobs`, create a job in the queue `push_notification_code_3`
+- When a job is created, it should log to the console `Notification job created: JOB_ID`
+- When a job is complete, it should log to the console `Notification job JOB_ID completed`
+- When a job is failed, it should log to the console `Notification job JOB_ID failed: ERROR`
+- When a job is making progress, it should log to the console `Notification job JOB_ID PERCENT% complete`
+
+- Given File: [8-job-main.js](8-job-main.js)
+- Out File: `8-job.js`
+
+```sh
+$ npm run dev 8-job-main.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "8-job-main.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 8-job-main.js`
+Notification job created: 51
+
 ```
