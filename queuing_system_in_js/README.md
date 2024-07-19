@@ -27,6 +27,7 @@ Table of Contents:
 - [8. Track progress and errors with Kue: Create the Job creator](#8-track-progress-and-errors-with-kue-create-the-job-creator)
 - [9. Track progress and errors with Kue: Create the Job processor](#9-track-progress-and-errors-with-kue-create-the-job-processor)
 - [10. Writing the job creation function](#10-writing-the-job-creation-function)
+- [11. Writing the test for job creation](#11-writing-the-test-for-job-creation)
 
 ## 0. Install a redis instance
 Download, extract, and compile the latest stable Redis version (higher than 5.0.7 - [https://redis.io/downloads/](https://intranet.hbtn.io/rltoken/CrunG4jBw9YkIIJ9pbFJ2Q "https://redis.io/downloads/")):
@@ -628,5 +629,37 @@ $ npm run dev 8-job-main.js
 [nodemon] watching extensions: js,mjs,json
 [nodemon] starting `babel-node --presets @babel/preset-env 8-job-main.js`
 Notification job created: 51
+
+```
+
+## 11. Writing the test for job creation
+Now that you created a job creator, let’s add tests:
+- Import the function `createPushNotificationsJobs`
+- Create a queue with `Kue`
+- Write a test suite for the `createPushNotificationsJobs` function:
+    - Use `queue.testMode` to validate which jobs are inside the queue
+    - etc.
+
+**Requirements:**
+- Make sure to enter the test mode without processing the jobs before executing the tests
+- Make sure to clear the queue and exit the test mode after executing the tests
+- File: `8-job.test.js`
+
+```sh
+$ npm test 8-job.test.js 
+
+> queuing_system_in_js@1.0.0 test /root
+> mocha --require @babel/register --exit "8-job.test.js"
+
+
+
+  createPushNotificationsJobs
+    ✓ display a error message if jobs is not an array
+Notification job created: 1
+Notification job created: 2
+    ✓ create two new jobs to the queue
+...
+
+  123 passing (417ms)
 
 ```
