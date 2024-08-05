@@ -144,3 +144,39 @@ Nasty Idols 0
 Hanoi Rocks 0
 $ 
 ```
+
+## 4. Buy buy buy
+Write a SQL script that creates a trigger that decreases the quantity of an item after adding a new order.
+
+Quantity in the table `items` can be negative.
+
+- Given Files: [4-init.sql](4-init.sql), [4-main.sql](4-main.sql)
+- File: `4-store.sql`
+
+**Context:** _Updating multiple tables for one action from your application can generate issue: network disconnection, crash, etc… to keep your data in a good shape, let MySQL do it for you!_
+
+```sh
+$ cat 4-init.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 4-store.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 4-main.sql | mysql -uroot -p holberton 
+Enter password: 
+name    quantity
+apple   10
+pineapple   10
+pear    10
+--
+--
+name    quantity
+apple   6
+pineapple   10
+pear    8
+item_name   number
+apple   1
+apple   3
+pear    2
+$ 
+```
