@@ -25,7 +25,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[Callable[..., T]]) -> T:
+    def get(self, key: str, fn: Optional[Callable[..., T]] = None) -> T:
         """ Retrieve data with `key` and converts it using `fn`.
         """
         data = self._redis.get(key)
