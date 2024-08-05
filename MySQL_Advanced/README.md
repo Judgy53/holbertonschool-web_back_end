@@ -85,3 +85,34 @@ id  email   name    country
 3   john@dylan.com  John    US
 $ 
 ```
+
+## 2. Best band ever!
+Write a SQL script that ranks country origins of bands, ordered by the number of (non-unique) fans
+
+**Requirements:**
+
+- Import this table dump: [metal_bands.sql](metal_bands.sql)
+- Column names must be: `origin` and `nb_fans`
+- Your script can be executed on any database
+- File: `2-fans.sql`
+
+**Context:** _Calculate/compute something is always power intensive… better to distribute the load!_
+
+```sh
+$ cat metal_bands.sql | mysql -uroot -p holberton
+Enter password: 
+$ 
+$ cat 2-fans.sql | mysql -uroot -p holberton > tmp_res ; head tmp_res
+Enter password: 
+origin  nb_fans
+USA 99349
+Sweden  47169
+Finland 32878
+United Kingdom  32518
+Germany 29486
+Norway  22405
+Canada  8874
+The Netherlands 8819
+Italy   7178
+$ 
+```
