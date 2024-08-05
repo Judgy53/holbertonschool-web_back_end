@@ -10,6 +10,7 @@ Table of Contents:
 - [1. Reading from Redis and recovering original type](#1-reading-from-redis-and-recovering-original-type)
 - [2. Incrementing values](#2-incrementing-values)
 - [3. Storing lists](#3-storing-lists)
+- [4. Retrieving lists](#4-retrieving-lists)
 
 ## 0. Writing strings to Redis
 Create a `Cache` class. In the `__init__` method, store an instance of the Redis client as a private variable named `_redis` (using `redis.Redis()`) and flush the instance using `flushdb`.
@@ -100,4 +101,21 @@ a160a8a8-06dc-4934-8e95-df0cb839644b
 inputs: [b"('first',)", b"('secont',)", b"('third',)"]
 outputs: [b'04f8dcaa-d354-4221-87f3-4923393a25ad', b'a160a8a8-06dc-4934-8e95-df0cb839644b', b'15a8fd87-1f55-4059-86aa-9d1a0d4f2aea']
 $ 
+```
+
+## 4. Retrieving lists
+In this tasks, we will implement a `replay` function to display the history of calls of a particular function.
+
+Tip: use `lrange` and `zip` to loop over inputs and outputs.
+
+- Given File: [4-main.py](4-main.py)
+- Out File: `exercise.py`
+
+```sh
+$ ./4-main.py
+Cache.store was called 3 times:
+Cache.store(*('foo',)) -> 13bf32a9-a249-4664-95fc-b1062db2038f
+Cache.store(*('bar',)) -> dcddd00c-4219-4dd7-8877-66afbe8e7df8
+Cache.store(*(42,)) -> 5e752f2b-ecd8-4925-a3ce-e2efdee08d20
+$
 ```
