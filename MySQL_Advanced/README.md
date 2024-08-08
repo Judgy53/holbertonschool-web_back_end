@@ -18,6 +18,7 @@ Table of Contents:
 - [6. Add bonus](#6-add-bonus)
 - [7. Average score](#7-average-score)
 - [8. Optimize simple search](#8-optimize-simple-search)
+- [9. Optimize search and score](#9-optimize-search-and-score)
 
 ---
 ## 0. We are all unique!
@@ -340,6 +341,8 @@ Write a SQL script that creates an index `idx_name_first` on the table `names` a
 
 **Context:** _Index is not the solution for any performance issue, but well used, it’s really powerful!_
 
+- File: `8-index_my_names.sql`
+
 ```sh
 $ cat names.sql | mysql -uroot -p holberton
 Enter password: 
@@ -381,5 +384,60 @@ mysql>
 mysql> exit
 bye
 $ 
+```
+<sub>[Return to top](#mysql_advanced)</sub>
+
+## 9. Optimize search and score
+Write a SQL script that creates an index `idx_name_first_score` on the table `names` and the first letter of `name` and the `score`.
+
+**Requirements:**
+
+- Import this table dump: [names.sql.zip](https://intranet-projects-files.s3.amazonaws.com/holbertonschool-webstack/632/names.sql.zip "names.sql.zip")
+- Only the first letter of `name` AND `score` must be indexed
+
+- File: `9-index_name_score.sql`
+
+```sh
+bob@dylan:~$ cat names.sql | mysql -uroot -p holberton
+Enter password: 
+bob@dylan:~$ 
+bob@dylan:~$ mysql -uroot -p holberton
+Enter password: 
+mysql> SELECT COUNT(name) FROM names WHERE name LIKE 'a%' AND score < 80;
++-------------+
+| count(name) |
++-------------+
+|       60717 |
++-------------+
+1 row in set (2.40 sec)
+mysql> 
+mysql> exit
+bye
+bob@dylan:~$ 
+bob@dylan:~$ cat 9-index_name_score.sql | mysql -uroot -p holberton 
+Enter password: 
+bob@dylan:~$ 
+bob@dylan:~$ mysql -uroot -p holberton
+Enter password: 
+mysql> SHOW index FROM names;
++-------+------------+----------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table | Non_unique | Key_name             | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-------+------------+----------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| names |          1 | idx_name_first_score |            1 | name        | A         |          25 |        1 | NULL   | YES  | BTREE      |         |               |
+| names |          1 | idx_name_first_score |            2 | score       | A         |        3901 |     NULL | NULL   | YES  | BTREE      |         |               |
++-------+------------+----------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+2 rows in set (0.00 sec)
+mysql> 
+mysql> SELECT COUNT(name) FROM names WHERE name LIKE 'a%' AND score < 80;
++-------------+
+| COUNT(name) |
++-------------+
+|       60717 |
++-------------+
+1 row in set (0.48 sec)
+mysql> 
+mysql> exit
+bye
+bob@dylan:~$ 
 ```
 <sub>[Return to top](#mysql_advanced)</sub>
