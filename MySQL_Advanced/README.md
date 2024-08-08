@@ -180,3 +180,39 @@ apple   3
 pear    2
 $ 
 ```
+
+## 5. Email validation to sent
+Write a SQL script that creates a trigger that resets the attribute `valid_email` only when the `email` has been changed.
+
+**Context:** _Nothing related to MySQL, but perfect for user email validation - distribute the logic to the database itself!_
+
+- Given Files: [5-init.sql](5-init.sql), [5-main.sql](5-main.sql)
+- File: `5-valid_email.sql`
+
+```sh
+$ cat 5-init.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 5-valid_email.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 5-main.sql | mysql -uroot -p holberton 
+Enter password: 
+id  email   name    valid_email
+1   bob@dylan.com   Bob 0
+2   sylvie@dylan.com    Sylvie  1
+3   jeanne@dylan.com    Jeanne  1
+--
+--
+id  email   name    valid_email
+1   bob@dylan.com   Bob 1
+2   sylvie+new@dylan.com    Sylvie  0
+3   jeanne@dylan.com    Jannis  1
+--
+--
+id  email   name    valid_email
+1   bob@dylan.com   Bob 1
+2   sylvie+new@dylan.com    Sylvie  0
+3   jeanne@dylan.com    Jannis  1
+$ 
+```
