@@ -19,6 +19,7 @@ Table of Contents:
 - [7. Average score](#7-average-score)
 - [8. Optimize simple search](#8-optimize-simple-search)
 - [9. Optimize search and score](#9-optimize-search-and-score)
+- [10. Safe divide](#10-safe-divide)
 
 ---
 ## 0. We are all unique!
@@ -398,10 +399,10 @@ Write a SQL script that creates an index `idx_name_first_score` on the table `na
 - File: `9-index_name_score.sql`
 
 ```sh
-bob@dylan:~$ cat names.sql | mysql -uroot -p holberton
+$ cat names.sql | mysql -uroot -p holberton
 Enter password: 
-bob@dylan:~$ 
-bob@dylan:~$ mysql -uroot -p holberton
+$ 
+$ mysql -uroot -p holberton
 Enter password: 
 mysql> SELECT COUNT(name) FROM names WHERE name LIKE 'a%' AND score < 80;
 +-------------+
@@ -413,11 +414,11 @@ mysql> SELECT COUNT(name) FROM names WHERE name LIKE 'a%' AND score < 80;
 mysql> 
 mysql> exit
 bye
-bob@dylan:~$ 
-bob@dylan:~$ cat 9-index_name_score.sql | mysql -uroot -p holberton 
+$ 
+$ cat 9-index_name_score.sql | mysql -uroot -p holberton 
 Enter password: 
-bob@dylan:~$ 
-bob@dylan:~$ mysql -uroot -p holberton
+$ 
+$ mysql -uroot -p holberton
 Enter password: 
 mysql> SHOW index FROM names;
 +-------+------------+----------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
@@ -438,6 +439,50 @@ mysql> SELECT COUNT(name) FROM names WHERE name LIKE 'a%' AND score < 80;
 mysql> 
 mysql> exit
 bye
-bob@dylan:~$ 
+$ 
+```
+<sub>[Return to top](#mysql_advanced)</sub>
+
+## 10. Safe divide
+Write a SQL script that creates a function `SafeDiv` that divides (and returns) the first by the second number or returns 0 if the second number is equal to 0.
+
+**Requirements:**
+
+- You must create a function
+- The function `SafeDiv` takes 2 arguments:
+    - `a`, INT
+    - `b`, INT
+- And returns `a / b` or 0 if `b == 0`
+
+- Given Files: [10-init.sql](10-init.sql)
+- File: `10-div.sql`
+
+```sh
+$ cat 10-init.sql | mysql -uroot -p holberton
+Enter password: 
+$ 
+$ cat 10-div.sql | mysql -uroot -p holberton
+Enter password: 
+$ 
+$ echo "SELECT (a / b) FROM numbers;" | mysql -uroot -p holberton
+Enter password: 
+(a / b)
+5.0000
+0.8000
+0.6667
+2.0000
+NULL
+0.7500
+$ 
+$ echo "SELECT SafeDiv(a, b) FROM numbers;" | mysql -uroot -p holberton
+Enter password: 
+SafeDiv(a, b)
+5
+0.800000011920929
+0.6666666865348816
+2
+0
+0.75
+$ 
 ```
 <sub>[Return to top](#mysql_advanced)</sub>
