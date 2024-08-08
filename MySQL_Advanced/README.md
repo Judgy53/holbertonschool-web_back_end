@@ -8,7 +8,15 @@ Topics Covered:
 - What is and how to implement views in MySQL
 - What is and how to implement triggers in MySQL
 
+Table of Contents:
+- [0. We are all unique!](#0-we-are-all-unique)
+- [1. In and not out](#1-in-and-not-out)
+- [2. Best band ever!](#2-best-band-ever)
+- [3. Old school band](#3-old-school-band)
+- [4. Buy buy buy](#4-buy-buy-buy)
+- [5. Email validation to sent](#5-email-validation-to-sent)
 
+---
 ## 0. We are all unique!
 Write a SQL script that creates a table `users` following these requirements:
 
@@ -45,6 +53,7 @@ id  email   name
 2   sylvie@dylan.com    Sylvie
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
 
 ## 1. In and not out
 Write a SQL script that creates a table `users` following these requirements:
@@ -85,6 +94,7 @@ id  email   name    country
 3   john@dylan.com  John    US
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
 
 ## 2. Best band ever!
 Write a SQL script that ranks country origins of bands, ordered by the number of (non-unique) fans
@@ -116,6 +126,7 @@ The Netherlands 8819
 Italy   7178
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
 
 ## 3. Old school band
 Write a SQL script that lists all bands with `Glam rock` as their main style, ranked by their longevity
@@ -144,6 +155,7 @@ Nasty Idols 0
 Hanoi Rocks 0
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
 
 ## 4. Buy buy buy
 Write a SQL script that creates a trigger that decreases the quantity of an item after adding a new order.
@@ -180,6 +192,7 @@ apple   3
 pear    2
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
 
 ## 5. Email validation to sent
 Write a SQL script that creates a trigger that resets the attribute `valid_email` only when the `email` has been changed.
@@ -216,3 +229,4 @@ id  email   name    valid_email
 3   jeanne@dylan.com    Jannis  1
 $ 
 ```
+<sub>[Return to top](#mysql_advanced)</sub>
