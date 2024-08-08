@@ -16,6 +16,7 @@ Table of Contents:
 - [4. Buy buy buy](#4-buy-buy-buy)
 - [5. Email validation to sent](#5-email-validation-to-sent)
 - [6. Add bonus](#6-add-bonus)
+- [7. Average score](#7-average-score)
 
 ---
 ## 0. We are all unique!
@@ -244,20 +245,20 @@ Write a SQL script that creates a stored procedure `AddBonus` that adds a new co
 
 **Context:** _Write code in SQL is a nice level up!_
 
-- Given Files: [6-init.sql](5-init.sql), [6-main.sql](5-main.sql)
+- Given Files: [6-init.sql](6-init.sql), [6-main.sql](6-main.sql)
 - File: `6-bonus.sql`
 
 ```sh
-bob@dylan:~$ cat 6-init.sql | mysql -uroot -p holberton 
+$ cat 6-init.sql | mysql -uroot -p holberton 
 Enter password: 
-bob@dylan:~$ 
-bob@dylan:~$ cat 6-bonus.sql | mysql -uroot -p holberton 
+$ 
+$ cat 6-bonus.sql | mysql -uroot -p holberton 
 Enter password: 
-bob@dylan:~$ 
-bob@dylan:~$ cat 6-main.sql
+$ 
+$ cat 6-main.sql
 Enter password: 
-bob@dylan:~$ 
-bob@dylan:~$ cat 6-main.sql | mysql -uroot -p holberton 
+$ 
+$ cat 6-main.sql | mysql -uroot -p holberton 
 Enter password: 
 id  name
 1   C is fun
@@ -285,6 +286,45 @@ user_id project_id  score
 2   3   100
 1   3   10
 2   4   90
-bob@dylan:~$ 
+$ 
+```
+<sub>[Return to top](#mysql_advanced)</sub>
+
+## 7. Average score
+Write a SQL script that creates a stored procedure `ComputeAverageScoreForUser` that computes and store the average score for a student. Note: An average score can be a decimal
+
+**Requirements:**
+
+- Procedure `ComputeAverageScoreForUser` is taking 1 input:
+    - `user_id`, a `users.id` value (you can assume `user_id` is linked to an existing `users`)
+    - 
+- Given Files: [7-init.sql](7-init.sql), [7-main.sql](7-main.sql)
+- File: `7-average_score.sql`
+
+```sh
+$ cat 7-init.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 7-average_score.sql | mysql -uroot -p holberton 
+Enter password: 
+$ 
+$ cat 7-main.sql | mysql -uroot -p holberton 
+Enter password: 
+id  name    average_score
+1   Bob 0
+2   Jeanne  0
+user_id project_id  score
+1   1   80
+1   2   96
+2   1   91
+2   2   73
+--
+--
+--
+--
+id  name    average_score
+1   Bob 0
+2   Jeanne  82
+$ 
 ```
 <sub>[Return to top](#mysql_advanced)</sub>
