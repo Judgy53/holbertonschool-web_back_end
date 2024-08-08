@@ -20,6 +20,7 @@ Table of Contents:
 - [8. Optimize simple search](#8-optimize-simple-search)
 - [9. Optimize search and score](#9-optimize-search-and-score)
 - [10. Safe divide](#10-safe-divide)
+- [11. No table for a meeting](#11-no-table-for-a-meeting)
 
 ---
 ## 0. We are all unique!
@@ -483,6 +484,62 @@ SafeDiv(a, b)
 2
 0
 0.75
+$ 
+```
+<sub>[Return to top](#mysql_advanced)</sub>
+
+## 11. No table for a meeting
+Write a SQL script that creates a view `need_meeting` that lists all students that have a score under 80 (strict) and no `last_meeting` or more than 1 month.
+
+**Requirements:**
+
+- The view `need_meeting` should return all students name when:
+    - They score are under (strict) to 80
+    - **AND** no `last_meeting` date **OR** more than a month
+
+- Given Files: [11-init.sql](11-init.sql), [11-main.sql](11-main.sql)
+- File: `11-need_meeting.sql`
+
+```sh
+$ cat 11-init.sql | mysql -uroot -p holberton
+Enter password: 
+$ 
+$ cat 11-need_meeting.sql | mysql -uroot -p holberton
+Enter password: 
+$ 
+$ cat 11-main.sql | mysql -uroot -p holberton
+Enter password: 
+name
+Jean
+Steeve
+--
+--
+name
+Bob
+Jean
+Steeve
+--
+--
+name
+Bob
+Jean
+--
+--
+name
+Bob
+--
+--
+name
+Bob
+Jean
+--
+--
+View    Create View character_set_client    collation_connection
+XXXXXX<yes, here it will display the View SQL statement :-) >XXXXXX
+--
+--
+Table   Create Table
+students    CREATE TABLE `students` (\n  `name` varchar(255) NOT NULL,\n  `score` int(11) DEFAULT '0',\n  `last_meeting` date DEFAULT NULL\n) ENGINE=InnoDB DEFAULT CHARSET=latin1
 $ 
 ```
 <sub>[Return to top](#mysql_advanced)</sub>
